@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body background= "kruising.png">
+<form>
+    <h1>Kruising3.html</h1>
+    <input type="button" value="start" onclick="starten()">
+    <input type="button" value="stop" onclick="stop()">
+    <input type="button" value="opnieuw" onclick="opnieuw()">
+    <img id="auto" src="autogroen.png" width="40px" height="80px">
+    <img id="auto2" src="autorood3.png" width="40px" height="80px">
+    <img id="auto3" src="autorood2.png" width="80px" height="80px">
+    <img id="auto4" src="autoblauw.png" width="80px" height="40px">
+    <input type="button" value="aanzetten" onclick="aanzetten()">
+    <input type="button" value="knipperen" onclick="knipperen()">
+    <input type="button" value="uitzetten" onclick="uitzetten()">
+    <img id="stoplicht" src="stoplichtuit.png" width="20px" height="40px">
+    <img id="stoplicht2" src="stoplichtuit.png" width="20px" height="40px">
+    <img id="stoplicht3" src="stoplichtuit3.png" width="40px" height="20px">
+    <img id="stoplicht4" src="stoplichtuit4.png" width="40px" height="20px">
+
+</form>
+<script>
+    var rijden;
+    var auto=document.getElementById('auto');
+    var auto2=document.getElementById('auto2');
+    var auto3=document.getElementById('auto3');
+    var auto4=document.getElementById('auto4');
+    var werken;
+    var buitenwerking;
+    var stoplicht=document.getElementById('stoplicht');
+    var stoplicht2=document.getElementById('stoplicht2');
+    var stoplicht3=document.getElementById('stoplicht3');
+    var stoplicht4=document.getElementById('stoplicht4');
+
+    auto.style.position='absolute';
+    auto.style.left='650px';
+    auto.style.top='800px';
+    auto2.style.position='absolute';
+    auto2.style.left='550px';
+    auto2.style.top='5px';
+    auto3.style.position='absolute';
+    auto3.style.left='5px';
+    auto3.style.bottom='250px';
+    auto4.style.position='absolute';
+    auto4.style.right='5px';
+    auto4.style.top='380px';
+
+    stoplicht.style.position='absolute';
+    stoplicht.style.left='715px';
+    stoplicht.style.top='510px';
+    stoplicht2.style.position='absolute';
+    stoplicht2.style.left='510px';
+    stoplicht2.style.top='320px';
+    stoplicht2.style.transform = 'rotate(180deg)';
+    stoplicht3.style.position='absolute';
+    stoplicht3.style.left='490px';
+    stoplicht3.style.bottom='228px';
+    stoplicht4.style.position='absolute';
+    stoplicht4.style.right='760px';
+    stoplicht4.style.top='340px';
+
+    function starten() {
+        rijden = setTimeout(starten, 10);
+
+        y_auto = parseInt(auto.style.top);
+        if(parseInt(auto.style.top)<-80)
+        {auto.style.top='900px';}
+        if(slir_lr===false&&y_auto===550)
+        {snelheid = 0;}
+        else
+        {snelheid = 5;}
+        auto.style.top = parseInt(auto.style.top) -snelheid + 'px';
+
+        y_auto2 = parseInt(auto2.style.top);
+        if (parseInt(auto2.style.top) > 900)
+        {auto2.style.top='-80px';}
+        if (slir_lr===false&&y_auto2===250)
+        {snelheid2 = 0;}
+        else
+        {snelheid2 = 5;}
+        auto2.style.top = parseInt(auto2.style.top) +snelheid2 + 'px';
+
+        y_auto3 =  parseInt(auto3.style.left);
+        if (parseInt(auto3.style.left) > 1500)
+        {auto3.style.left = '-80px';}
+        if (slir_bb===false&&y_auto3===400)
+        {snelheid3 = 0;}
+        else
+        {snelheid3 = 5;}
+        auto3.style.left = parseInt(auto3.style.left) +snelheid3 + 'px';
+
+        y_auto4 = parseInt(auto4.style.right);
+        if (parseInt(auto4.style.right) > 1500)
+        {auto4.style.right = '-80px';}
+        if (slir_bb===false&&y_auto4===700)
+        {snelheid4 = 0;}
+        else
+        {snelheid4 = 5;}
+        auto4.style.right = parseInt(auto4.style.right) +snelheid4 + 'px';
+    }
+
+
+    function stop(){
+        clearTimeout(rijden);
+    }
+
+    function opnieuw(){
+        clearTimeout(rijden);
+        auto.style.top = '800px';
+        auto2.style.top='5px';
+        auto3.style.left='5px';
+        auto4.style.right='5px';
+    }
+
+    function aanzetten(){
+        clearTimeout(buitenwerking);
+        maakRoodGroen();
+        werken = setTimeout (maakRoodGeel, 4000);
+        werken = setTimeout (maakRoodRood, 6000);
+        werken = setTimeout (maakGroenRood, 8000);
+        werken = setTimeout (maakGeelRood, 12000);
+        werken = setTimeout (maakRoodRood, 15000);
+        werken = setTimeout (aanzetten, 17000);
+    }
+
+    function knipperen() {
+        clearTimeout(werken);
+        maakOranje();
+        buitenwerking = setTimeout(zetUit, 500);
+        buitenwerking = setTimeout(knipperen, 1000);
+    }
+    function maakOranje(){
+        stoplicht.src="stoplichtgeel.png";
+        stoplicht2.src="stoplichtgeel.png";
+        stoplicht3.src="stoplichtgeel3.png";
+        stoplicht4.src="stoplichtgeel4.png";
+    }
+
+    function uitzetten(){
+        zetUit();
+        clearTimeout(buitenwerking);
+        clearTimeout(werken);
+    }
+
+    function maakRoodGroen(){
+        stoplicht.src="stoplichtrood.png";
+        stoplicht2.src="stoplichtrood.png";
+        stoplicht3.src="stoplichtgroen3.png";
+        stoplicht4.src="stoplichtgroen4.png";
+        slir_lr=false;
+        slir_bb=true;
+    }
+
+    function maakRoodGeel(){
+        stoplicht.src="stoplichtrood.png";
+        stoplicht2.src="stoplichtrood.png";
+        stoplicht3.src="stoplichtgeel3.png";
+        stoplicht4.src="stoplichtgeel4.png";
+        slir_lr=false;
+        slir_bb=true;
+    }
+
+    function maakRoodRood(){
+        stoplicht.src="stoplichtrood.png";
+        stoplicht2.src="stoplichtrood.png";
+        stoplicht3.src="stoplichtrood3.png";
+        stoplicht4.src="stoplichtrood4.png";
+        slir_lr=false;
+        slir_bb=false;
+    }
+
+    function maakGroenRood(){
+        stoplicht.src="stoplichtgroen.png";
+        stoplicht2.src="stoplichtgroen.png";
+        stoplicht3.src="stoplichtrood3.png";
+        stoplicht4.src="stoplichtrood4.png";
+        slir_lr=true;
+        slir_bb=false;
+    }
+
+    function maakGeelRood(){
+        stoplicht.src="stoplichtgeel.png";
+        stoplicht2.src="stoplichtgeel.png";
+        stoplicht3.src="stoplichtrood3.png";
+        stoplicht4.src="stoplichtrood4.png";
+        slir_lr=true;
+        slir_bb=false;
+    }
+
+    function zetUit(){
+        stoplicht.src = "stoplichtuit.png";
+        stoplicht2.src = "stoplichtuit.png";
+        stoplicht3.src = "stoplichtuit3.png";
+        stoplicht4.src = "stoplichtuit4.png";
+    }
+</script>
+</body>
+</html>

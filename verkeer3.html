@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body background= "kruising.png">
+<form>
+    <h1>Verkeer1.html</h1>
+    <input type="button" value="start" onclick="starten()">
+    <input type="button" value="stop" onclick="stop()">
+    <input type="button" value="opnieuw" onclick="opnieuw()">
+    <img id="auto" src="autogroen.png" width="40px" height="80px">
+    <input type="button" value="aanzetten" onclick="aanzetten()">
+    <input type="button" value="knipperen" onclick="knipperen()">
+    <input type="button" value="uitzetten" onclick="uitzetten()">
+    <img id="stoplicht" src="stoplichtuit.png" width="20px" height="40px">
+</form>
+<script>
+    var rijden;
+    var auto=document.getElementById('auto');
+    var werken;
+    var buitenwerking;
+    var stoplicht=document.getElementById('stoplicht');
+
+    auto.style.position='absolute';
+    auto.style.left='650px';
+    auto.style.top='800px';
+    stoplicht.style.position='absolute';
+    stoplicht.style.left='715px';
+    stoplicht.style.top='510px';
+
+    function starten(){
+        y_auto=parseInt(auto.style.top);
+        rijden = setTimeout(starten, 10);
+        if(parseInt(auto.style.top)<-80)
+        {auto.style.top='900px'}
+
+        if(slir_lr&&y_auto==550)
+        {snelheid = 0;}
+        else
+        {snelheid = 5;}
+
+        auto.style.top = parseInt(auto.style.top) -snelheid + 'px';
+    }
+
+    function stop(){
+        clearTimeout(rijden);
+    }
+
+    function opnieuw(){
+        clearTimeout(rijden);
+        auto.style.top = '800px'
+    }
+
+    function aanzetten(){
+        clearTimeout(buitenwerking);
+        maakRood();
+        werken = setTimeout (maakGroen, 4000);
+        werken = setTimeout (maakOranje, 8000);
+        werken = setTimeout (aanzetten, 10000);
+    }
+
+    function knipperen(){
+        clearTimeout(werken);
+        maakOranje();
+        buitenwerking = setTimeout(zetUit, 500);
+        buitenwerking = setTimeout(knipperen, 1000);
+    }
+
+    function uitzetten(){
+        zetUit();
+        clearTimeout(buitenwerking);
+        clearTimeout(werken);
+    }
+
+    function maakRood(){
+        stoplicht.src = "stoplichtrood.png";
+        slir_lr = true;
+    }
+
+    function maakOranje(){
+        stoplicht.src = "stoplichtgeel.png";
+    }
+
+    function maakGroen(){
+        stoplicht.src = "stoplichtgroen.png";
+        slir_lr = false;
+    }
+
+    function zetUit(){
+        stoplicht.src = "stoplichtuit.png";
+    }
+
+</script>
+</body>
+</html>
